@@ -1,0 +1,39 @@
+[build-system]
+requires = [
+  "setuptools >= 70",
+  "numpy"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ligotools"
+authors = [
+  { name="Ligo Scientific Collaboration (LSC) and Clara Reckhorn", email="clara_reckhorn@berkeley.edu" },
+]
+description = "This module provides tools for reading LIGO data files."
+readme = "README.md"
+
+requires-python = ">=3.9"
+dependencies = [
+    "tqdm",
+]
+
+license = "BSD-3-Clause"
+license-files = ["LICEN[CS]E*"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent"
+]
+
+keywords = ["tools", "toys"]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/fperez/mytoy"
+Issues = "https://github.com/fperez/mytoy/issues"
+
+[tool.setuptools]
+packages = ["ligotools"]
+
+[tool.setuptools.dynamic]
+version = {attr = "ligotools.__version__"}
