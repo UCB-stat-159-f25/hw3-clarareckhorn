@@ -10,7 +10,7 @@ name = "ligotools"
 authors = [
   { name="Ligo Scientific Collaboration (LSC) and Clara Reckhorn", email="clara_reckhorn@berkeley.edu" },
 ]
-description = "This module provides tools for reading LIGO data files."
+description = "python code for reading LOSC data files"
 readme = "README.md"
 
 requires-python = ">=3.9"
@@ -25,12 +25,12 @@ classifiers = [
     "Operating System :: OS Independent"
 ]
 
-keywords = ["tools", "toys"]
+keywords = ["tools"]
 dynamic = ["version"]
 
 [project.urls]
-Homepage = "https://github.com/fperez/mytoy"
-Issues = "https://github.com/fperez/mytoy/issues"
+Homepage = "https://github.com/UCB-stat-159-f25/hw3-clarareckhorn/tree/main/ligotools"
+Issues = "https://github.com/UCB-stat-159-f25/hw3-clarareckhorn/issues"
 
 [tool.setuptools]
 packages = ["ligotools"]
