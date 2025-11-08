@@ -1,0 +1,135 @@
+input: 
+
+is this enough for my init file """ ligotools package """ __version__ = "0.0.1" from .readligo import *
+
+output: 
+
+That’s a great start, but not quite enough — here’s why 👇
+
+Right now your __init__.py only imports from readligo, so when you try to do
+
+from ligotools.utils import whiten
+
+
+Python doesn’t “see” the utils submodule, because you never told it to expose that file as part of the package.
+
+✅ Here’s how to fix it
+
+Replace your current __init__.py with this:
+
+"""
+ligotools package
+"""
+
+__version__ = "0.0.1"
+
+from . import readligo
+from . import utils
+
+
+That’s enough for this import to work properly:
+
+from ligotools.utils import whiten
+
+input:
+
+
+You said:
+# Standard python numerical analysis imports:
+import numpy as np
+from scipy.signal import windows
+from scipy.interpolate import interp1d
+from scipy.signal import butter, filtfilt, iirdesign, zpk2tf, freqz
+import h5py
+import json
+
+# Importing packages from ligotools
+from ligotools.utils import whiten, write_wavfile, reqshift, plot_matched_filter_time_series, plot_psd_and_template
+
+# the IPython magic below must be commented out in the .py file, since it doesn't work there.
+%matplotlib inline
+%config InlineBackend.figure_format = 'retina'
+import matplotlib.pyplot as plt
+import matplotlib.mlab as mlab
+
+# LIGO-specific readligo.py 
+from ligotools import readligo as rl
+
+# you might get a matplotlib warning here; you can ignore it.
+
+
+this is my error:
+
+ModuleNotFoundError                       Traceback (most recent call last)
+Cell In[3], line 10
+      7 import json
+      9 # Importing packages from ligotools
+---> 10 from ligotools.utils import whiten, write_wavfile, reqshift, plot_matched_filter_time_series, plot_psd_and_template
+     12 # the IPython magic below must be commented out in the .py file, since it doesn't work there.
+     13 get_ipython().run_line_magic('matplotlib', 'inline')
+
+ModuleNotFoundError: No module named 'ligotools.utils'
+
+i have a document 
+hw3-clarareckhorn/ligotools/ligotools/utils.py that has my functions that im trying to use but its giving an error
+
+output:
+
+Ah, classic Python import issue — this happens when your ligotools package isn’t being recognized as an installable or importable module from your current working directory. Let’s go step by step to fix it.
+
+✅ Step 1: Check your folder structure
+
+Make sure it looks like this:
+
+hw3-clarareckhorn/
+│
+├── ligotools/
+│   ├── __init__.py
+│   ├── readligo.py
+│   ├── utils.py
+│   └── other files...
+│
+└── notebook_or_script.ipynb
+
+
+⚠️ The __init__.py file is essential — it tells Python this folder is a package.
+If it’s missing, create an empty file called __init__.py inside ligotools/.
+
+✅ Step 2: Check where you are running the notebook/script from
+
+In your notebook, run:
+
+import os
+print(os.getcwd())
+
+
+This shows your current working directory.
+If it’s not the same folder that contains ligotools/, Python won’t find it.
+
+You can fix that by adding the parent folder to the Python path:
+
+import sys
+sys.path.append('/path/to/hw3-clarareckhorn')
+
+
+For example, if your notebook is inside hw3-clarareckhorn/, use:
+
+sys.path.append('.')
+
+✅ Step 3: Try importing again
+
+After you’ve ensured both the path and __init__.py file are in place, try again:
+
+from ligotools.utils import whiten, write_wavfile, reqshift, plot_matched_filter_time_series, plot_psd_and_template
+
+✅ Step 4: (Optional but best practice)
+
+If you plan to use it across multiple notebooks or scripts, install your package in editable mode:
+
+cd hw3-clarareckhorn
+pip install -e .
+
+
+This makes ligotools importable from anywhere on your system.
+
+If you want, you can paste your folder structure (with file names) here, and I’ll tell you exactly what to fix.
