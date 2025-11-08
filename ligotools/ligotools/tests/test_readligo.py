@@ -1,5 +1,5 @@
 import numpy as np
-from ligotools import readligo as rl
+from ligotools.ligotools import readligo as rl
 
 def test_numpy_import():
     """check that numpy is working properly"""

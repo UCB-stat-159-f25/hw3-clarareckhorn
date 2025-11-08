@@ -29,7 +29,7 @@ keywords = ["tools"]
 dynamic = ["version"]
 
 [project.urls]
-Homepage = "https://github.com/UCB-stat-159-f25/hw3-clarareckhorn/tree/main/ligotools"
+Homepage = "https://github.com/UCB-stat-159-f25/hw3-clarareckhorn"
 Issues = "https://github.com/UCB-stat-159-f25/hw3-clarareckhorn/issues"
 
 [tool.setuptools]

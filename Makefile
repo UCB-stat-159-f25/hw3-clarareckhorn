@@ -1,28 +1,22 @@
-.PHONY : outputs
-outputs : isles.dat abyss.dat sierra.dat last.dat
+ENV_NAME = ligo-analysis1
+PYTHON = python
+MYS = myst
 
-# Count words.
+.PHONY: env html clean help
 
-isles.dat : books/isles.txt
-	python countwords.py $< $@
+env:
+	@if conda env list | grep -q "^$(ENV_NAME) "; then \
+		conda env update -n $(ENV_NAME) -f environment.yml; \
+	else \
+		conda env create -f environment.yml; \
+	fi
 
-abyss.dat : books/abyss.txt
-	python countwords.py $< $@
+# build the myst site
+html:
+	myst build --html
 
-sierra.dat : books/sierra.txt
-	python countwords.py $< $@
-
-last.dat : books/last.txt
-	python countwords.py $< $@
-
-.PHONY : clean
-clean : figures, audio, _build
-	rm -f *.dat
-
-.PHONY : env
-clean : figures, audio, _build
-	rm -f *.dat
-
-.PHONY : html
-clean : figures, audio, _build
-	rm -f *.dat
+# Clean to delete the generated files
+clean:
+	rm -rf figures/*
+	rm -rf audio/*
+	rm -rf _build/*
